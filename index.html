@@ -622,11 +622,14 @@
     const fd = new FormData();
     Object.entries(payload).forEach(([k,v]) => fd.append(k,v));
 
-    fetch('https://script.google.com/macros/s/AKfycbwUdmBdy330OmOShsiOKkVzqi-b0WsAzsbKQkKpQ_F9B1NO6IkG5EcgyIsl5nN7Dt5s/exec', {
-      method: 'POST',
-      body: fd,
-      mode: 'no-cors'
-    });
+    fetch('https://primary-production-b1a51.up.railway.app/webhook/order', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify(payload)
+});
+
 
     // Fire & forget (Google Apps Script + no CORS)
     form.style.display = 'none';
