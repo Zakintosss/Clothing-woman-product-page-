@@ -692,7 +692,6 @@
         },
         body: JSON.stringify(payload)
       })
-      })
       .then(() => {
         const urgency = document.getElementById('offerUrgency');
         const countdown = document.getElementById('offerCountdown');
@@ -707,7 +706,7 @@
       })
       .catch(() => {
         alert('وقع مشكل أثناء إرسال الطلب، المرجو المحاولة مرة أخرى');
-          });
+      });
   });
   }
 </script>
