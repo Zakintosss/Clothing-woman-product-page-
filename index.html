@@ -482,60 +482,13 @@
 </div>
 
 <script>
-  /* LEGAL MODALS */
-  function openModal(id){ document.getElementById(id).style.display='flex'; }
-  function closeModal(id){ document.getElementById(id).style.display='none'; }
-</script>
-
-<style>
-  .legal-modal{
-    display:none;
-    position:fixed;
-    top:0;left:0;width:100%;height:100%;
-    background:rgba(0,0,0,0.6);
-    z-index:3000;
-    align-items:center;
-    justify-content:center;
-  }
-  .legal-content{
-    background:#fff;
-    max-width:600px;
-    width:90%;
-    padding:25px;
-    border-radius:10px;
-    position:relative;
-    text-align:right;
-    line-height:1.6;
-  }
-  .legal-content h2{color:#5b3a29;text-align:center;}
-  .legal-content .close{
-    position:absolute;
-    top:10px;left:15px;
-    font-size:22px;
-    cursor:pointer;
-  }
-</style>
-
-<script>
   /* =====================
      VIDEO AUTOPLAY
   ===================== */
   window.addEventListener('load', () => {
     const v = document.getElementById('heroVideo');
-    if (!v) return;
-    setTimeout(() => v.play().catch(() => {}), 1500);
+    if (v) setTimeout(() => v.play().catch(() => {}), 1500);
   });
-
-  /* =====================
-     CAROUSEL SCROLL
-  ===================== */
-  function scrollCarousel(btn, direction) {
-    const grid = btn.parentElement.querySelector('.grid');
-    const item = grid.children[0];
-    const gap = 16;
-    const width = item.offsetWidth + gap;
-    grid.scrollBy({ left: -width * direction, behavior: 'smooth' });
-  }
 
   /* =====================
      COUNTDOWN (8H)
@@ -554,10 +507,13 @@
   })();
 
   /* =====================
-     QUANTITY & COLOR LOGIC
+     QUANTITY / COLOR / PRICE
   ===================== */
   const qtyRadios = Array.from(document.querySelectorAll('input[name="quantity"]'));
   const colorInputs = Array.from(document.querySelectorAll('input[name="color"]'));
+  const priceEl = document.getElementById('totalPrice');
+  const unitEl = document.getElementById('unitPrice');
+  const noteEl = document.getElementById('discountNote');
 
   function getQty() {
     const q = qtyRadios.find(r => r.checked);
@@ -576,16 +532,9 @@
       if (!input.checked) {
         input.disabled = checked.length >= qty;
         input.nextElementSibling.style.opacity = input.disabled ? '0.5' : '1';
-        input.nextElementSibling.style.cursor = input.disabled ? 'not-allowed' : 'pointer';
       }
     });
-
-  /* =====================
-     PRICE PROMO LOGIC
-  ===================== */
-  const priceEl = document.getElementById('totalPrice');
-  const unitEl = document.getElementById('unitPrice');
-  const noteEl = document.getElementById('discountNote');
+  }
 
   function updatePrice() {
     const qty = getQty();
@@ -593,117 +542,69 @@
     let unit = 459;
 
     if (qty === 1) {
-      total = 459;
-      unit = 459;
-      noteEl.textContent = 'عرض قطعة واحدة';
+      total = 459; noteEl.textContent = 'عرض قطعة واحدة';
     } else if (qty === 2) {
-      total = 809;
-      unit = Math.round(total / 2);
-      noteEl.textContent = 'عرض ترويجي: قطعتان بسعر خاص';
+      total = 809; unit = Math.round(total / 2); noteEl.textContent = 'عرض ترويجي: قطعتان بسعر خاص';
     } else if (qty === 3) {
-      total = 1099;
-      unit = Math.round(total / 3);
-      noteEl.textContent = 'عرض ترويجي: 3 قطع بأفضل سعر';
-    } else if (qty >= 4) {
-      total = 1200;
-      unit = Math.round(total / 4);
-      noteEl.textContent = 'عرض ترويجي: 4 قطع بسعر خاص';
+      total = 1099; unit = Math.round(total / 3); noteEl.textContent = 'عرض ترويجي: 3 قطع بأفضل سعر';
+    } else {
+      total = 1200; unit = Math.round(total / 4); noteEl.textContent = 'عرض ترويجي: 4 قطع بسعر خاص';
     }
 
     priceEl.textContent = total + ' درهم';
     unitEl.textContent = `(${unit} درهم للقطعة)`;
   }
 
-  /* =====================
-     EVENTS
-  ===================== */
-  qtyRadios.forEach(r => r.addEventListener('change', () => {
-    updatePrice();
-    enforceColorLimit();
-  }));
-
-  colorInputs.forEach(input => {
-    input.addEventListener('change', e => {
-      enforceColorLimit();
-      const color = e.target.value;
-      const grid = document.querySelector('section:nth-of-type(2) .grid');
-      const items = Array.from(grid.children);
-      const target = items.find(i => i.dataset.color === color);
-      if (target) {
-        const gap = 16;
-        const width = target.offsetWidth + gap;
-        const index = items.indexOf(target);
-        grid.scrollTo({ left: index * width, behavior: 'smooth' });
-      }
-    });
-  });
+  qtyRadios.forEach(r => r.addEventListener('change', () => { updatePrice(); enforceColorLimit(); }));
+  colorInputs.forEach(c => c.addEventListener('change', enforceColorLimit));
 
   updatePrice();
   enforceColorLimit();
 
-    /* =====================
-     FORM SUBMIT (THANK YOU)
+  /* =====================
+     FORM SUBMIT
   ===================== */
   const form = document.getElementById('orderForm');
   const thankYou = document.getElementById('thankYouMessage');
   const sizeError = document.getElementById('sizeError');
   const colorError = document.getElementById('colorError');
 
-  if (form && thankYou) {
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
 
-      let valid = true;
-      sizeError.style.display = 'none';
-      colorError.style.display = 'none';
+    sizeError.style.display = 'none';
+    colorError.style.display = 'none';
 
-      const size = document.querySelector('input[name="size"]:checked');
-      if (!size) {
-        sizeError.style.display = 'block';
-        valid = false;
-      }
+    const size = document.querySelector('input[name="size"]:checked');
+    const colors = Array.from(document.querySelectorAll('input[name="color"]:checked'));
 
-      const colorsChecked = Array.from(document.querySelectorAll('input[name="color"]:checked'));
-      if (colorsChecked.length === 0) {
-        colorError.style.display = 'block';
-        valid = false;
-      }
+    if (!size) { sizeError.style.display = 'block'; return; }
+    if (colors.length === 0) { colorError.style.display = 'block'; return; }
 
-      if (!valid) return;
+    const payload = {
+      name: form.querySelector('input[placeholder="الاسم الكامل"]').value,
+      phone: form.querySelector('input[placeholder="رقم الهاتف"]').value,
+      city: form.querySelector('input[placeholder="المدينة"]').value,
+      size: size.value,
+      quantity: getQty(),
+      colors: colors.map(c => c.value).join(', '),
+      total: priceEl.textContent.replace(' درهم','')
+    };
 
-      const qty = getQty();
-      const total = priceEl.textContent.replace(' درهم','');
-
-      const payload = {
-        name: form.querySelector('input[placeholder="الاسم الكامل"]').value,
-        phone: form.querySelector('input[placeholder="رقم الهاتف"]').value,
-        city: form.querySelector('input[placeholder="المدينة"]').value,
-        size: size.value,
-        quantity: qty,
-        colors: colorsChecked.map(c => c.value).join(', '),
-        total: total
-      };
-
-      fetch('https://script.google.com/macros/s/AKfycbwbK3L4tIFBA8k1B9q2eMlHA5UFOM-6UaH9-N9py6C9GCgoEMBOl452qi6L2PHrHqO_/exec', {
-        method: 'POST',
-        body: JSON.stringify(payload)
-      .then(() => {
-        const urgency = document.getElementById('offerUrgency');
-        const countdown = document.getElementById('offerCountdown');
-        const offerTitle = document.getElementById('offerTitle');
-        if (urgency) urgency.style.display = 'none';
-        if (countdown) countdown.style.display = 'none';
-        if (offerTitle) offerTitle.style.display = 'none';
-
-        form.style.display = 'none';
-        thankYou.style.display = 'block';
-        thankYou.scrollIntoView({ behavior: 'smooth' });
-      })
-      .catch(() => {
-        alert('وقع مشكل أثناء إرسال الطلب، المرجو المحاولة مرة أخرى');
-      });
+    fetch('https://script.google.com/macros/s/AKfycbwbK3L4tIFBA8k1B9q2eMlHA5UFOM-6UaH9-N9py6C9GCgoEMBOl452qi6L2PHrHqO_/exec', {
+      method: 'POST',
+      body: JSON.stringify(payload)
+    })
+    .then(() => {
+      document.getElementById('offerUrgency').style.display = 'none';
+      document.getElementById('offerCountdown').style.display = 'none';
+      document.getElementById('offerTitle').style.display = 'none';
+      form.style.display = 'none';
+      thankYou.style.display = 'block';
+      thankYou.scrollIntoView({ behavior: 'smooth' });
+    })
+    .catch(() => alert('وقع مشكل أثناء إرسال الطلب، المرجو المحاولة مرة أخرى'));
   });
-  }
 </script>
 
 </body>
