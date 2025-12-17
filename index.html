@@ -579,7 +579,6 @@
         input.nextElementSibling.style.cursor = input.disabled ? 'not-allowed' : 'pointer';
       }
     });
-  }
 
   /* =====================
      PRICE PROMO LOGIC
@@ -686,11 +685,8 @@
       };
 
       fetch('https://script.google.com/macros/s/AKfycbwbK3L4tIFBA8k1B9q2eMlHA5UFOM-6UaH9-N9py6C9GCgoEMBOl452qi6L2PHrHqO_/exec', {
-  method: 'POST',
-  body: JSON.stringify(payload)
-})
-
-      })
+        method: 'POST',
+        body: JSON.stringify(payload)
       .then(() => {
         const urgency = document.getElementById('offerUrgency');
         const countdown = document.getElementById('offerCountdown');
