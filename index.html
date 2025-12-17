@@ -622,7 +622,7 @@
     const fd = new FormData();
     Object.entries(payload).forEach(([k,v]) => fd.append(k,v));
 
-    fetch('https://primary-production-b1a51.up.railway.app/webhook/order', {
+    fetch('https://primary-production-b1a51.up.railway.app/webhook-test/order', {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json'
