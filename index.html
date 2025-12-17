@@ -686,11 +686,10 @@
       };
 
       fetch('https://script.google.com/macros/s/AKfycbwbK3L4tIFBA8k1B9q2eMlHA5UFOM-6UaH9-N9py6C9GCgoEMBOl452qi6L2PHrHqO_/exec', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(payload)
+  method: 'POST',
+  body: JSON.stringify(payload)
+})
+
       })
       .then(() => {
         const urgency = document.getElementById('offerUrgency');
