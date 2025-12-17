@@ -163,7 +163,6 @@
       .carousel-arrow { display: none; }
       .grid-item { flex: 0 0 45%; }
     }
-    }
 
     /* ===== OFFER ===== */
     .offer-box {
@@ -651,73 +650,61 @@
   const sizeError = document.getElementById('sizeError');
   const colorError = document.getElementById('colorError');
 
-form.addEventListener('submit', function (e) {
-  e.preventDefault();
+  if (form && thankYou) {
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
 
-  let valid = true;
-  sizeError.style.display = 'none';
-  colorError.style.display = 'none';
+      let valid = true;
+      sizeError.style.display = 'none';
+      colorError.style.display = 'none';
 
-  const size = document.querySelector('input[name="size"]:checked');
-  if (!size) {
-    sizeError.style.display = 'block';
-    valid = false;
-  }
+      const size = document.querySelector('input[name="size"]:checked');
+      if (!size) {
+        sizeError.style.display = 'block';
+        valid = false;
+      }
 
-  const colors = Array.from(document.querySelectorAll('input[name="color"]:checked')).map(c => c.value);
-  if (colors.length === 0) {
-    colorError.style.display = 'block';
-    valid = false;
-  }
+      const colorsChecked = Array.from(document.querySelectorAll('input[name="color"]:checked'));
+      if (colorsChecked.length === 0) {
+        colorError.style.display = 'block';
+        valid = false;
+      }
 
-  if (!valid) return;
+      if (!valid) return;
 
-  // 🔹 DATA TO SEND TO GOOGLE SHEET
-  const data = {
-    name: document.querySelector('input[placeholder="الاسم الكامل"]').value,
-    phone: document.querySelector('input[placeholder="رقم الهاتف"]').value,
-    city: document.querySelector('input[placeholder="المدينة"]').value,
-    size: size.value,
-    color: colors.join(', '),
-    quantity: document.querySelector('input[name="quantity"]:checked').value
-  };
+      const qty = getQty();
+      const total = priceEl.textContent.replace(' درهم','');
 
-  // 🔹 SEND TO GOOGLE SHEET
-  fetch("https://script.google.com/macros/s/AKfycbw3YlWW5ZWnCBuN37rdKcoR8EX7q72ZZujP6wtlyqiXWivmgByqqbpcSkRhF_6I5BIV/exec", {
-    method: "POST",
-    body: JSON.stringify(data)
-  })
-  .then(() => {
-    // hide offer messages
-    const urgency = document.getElementById('offerUrgency');
-    const countdown = document.getElementById('offerCountdown');
-    const offerTitle = document.getElementById('offerTitle');
-    if (urgency) urgency.style.display = 'none';
-    if (countdown) countdown.style.display = 'none';
-    if (offerTitle) offerTitle.style.display = 'none';
+      const payload = {
+        name: form.querySelector('input[placeholder="الاسم الكامل"]').value,
+        phone: form.querySelector('input[placeholder="رقم الهاتف"]').value,
+        city: form.querySelector('input[placeholder="المدينة"]').value,
+        size: size.value,
+        quantity: qty,
+        colors: colorsChecked.map(c => c.value).join(', '),
+        total: total
+      };
 
-    form.style.display = 'none';
-    thankYou.style.display = 'block';
-    thankYou.scrollIntoView({ behavior: 'smooth' });
-  })
-  .catch(() => {
-    alert("وقع مشكل أثناء إرسال الطلب، المرجو المحاولة مرة أخرى");
+      fetch('https://script.google.com/macros/s/AKfycbw3YlWW5ZWnCBuN37rdKcoR8EX7q72ZZujP6wtlyqiXWivmgByqqbpcSkRhF_6I5BIV/exec', {
+        method: 'POST',
+        body: JSON.stringify(payload)
+      })
+      .then(() => {
+        const urgency = document.getElementById('offerUrgency');
+        const countdown = document.getElementById('offerCountdown');
+        const offerTitle = document.getElementById('offerTitle');
+        if (urgency) urgency.style.display = 'none';
+        if (countdown) countdown.style.display = 'none';
+        if (offerTitle) offerTitle.style.display = 'none';
+
+        form.style.display = 'none';
+        thankYou.style.display = 'block';
+        thankYou.scrollIntoView({ behavior: 'smooth' });
+      })
+      .catch(() => {
+        alert('وقع مشكل أثناء إرسال الطلب، المرجو المحاولة مرة أخرى');
+          });
   });
-});
-
-
-      // hide offer messages
-      const urgency = document.getElementById('offerUrgency');
-      const countdown = document.getElementById('offerCountdown');
-      const offerTitle = document.getElementById('offerTitle');
-      if (urgency) urgency.style.display = 'none';
-      if (countdown) countdown.style.display = 'none';
-      if (offerTitle) offerTitle.style.display = 'none';
-
-      form.style.display = 'none';
-      thankYou.style.display = 'block';
-      thankYou.scrollIntoView({ behavior: 'smooth' });
-    });
   }
 </script>
 
