@@ -622,15 +622,15 @@
     const fd = new FormData();
     Object.entries(payload).forEach(([k,v]) => fd.append(k,v));
 
-    fetch('https://script.google.com/macros/s/AKfycbxcwgvyyUDzqluLT0uB91HlyY2CP8gIXpmfQrtK4GO3FM9kKWX4TKuNNP9wlZuWEP6D/exec', {
+    fetch('https://script.google.com/macros/s/AKfycbwbK3L4tIFBA8k1B9q2eMlHA5UFOM-6UaH9-N9py6C9GCgoEMBOl452qi6L2PHrHqO_/exec', {
       method: 'POST',
-      body: fd
-    })
-    .then(() => {
-      form.style.display = 'none';
-      thankYou.style.display = 'block';
-    })
-    .catch(() => alert('وقع مشكل أثناء إرسال الطلب، المرجو المحاولة مرة أخرى'));
+      body: fd,
+      mode: 'no-cors'
+    });
+
+    // Fire & forget (Google Apps Script + no CORS)
+    form.style.display = 'none';
+    thankYou.style.display = 'block';
   });
   /* =====================
      LEGAL MODAL HANDLERS
