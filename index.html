@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>معطف شتوي فاخر</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background-color: #f6f6f6;
+      color: #222;
+      line-height: 1.4;
+      overflow-x: hidden;
+    }
+
+    /* ===== SOFT BLURRED BACKGROUND DECORATIONS ===== */
+    .bg-blob {
+      position: fixed;
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      filter: blur(120px);
+      opacity: 0.35;
+      z-index: -1;
+      animation: floatBlob 18s ease-in-out infinite alternate;
+    }
+
+    .bg-blob.one {
+      background: #d9c2b0;
+      top: 10%;
+      right: -120px;
+    }
+
+    .bg-blob.two {
+      background: #c9b29b;
+      bottom: 20%;
+      left: -120px;
+      animation-delay: 6s;
+    }
+
+    .bg-blob.three {
+      background: #bfa58a;
+      top: 55%;
+      right: -150px;
+      animation-delay: 12s;
+    }
+
+    @keyframes floatBlob {
+      0% {
+        transform: translateY(0) translateX(0) scale(1);
+      }
+      100% {
+        transform: translateY(-60px) translateX(40px) scale(1.1);
+      }
+    }
+
+    header {
+      background-color: #5b3a29;
+      padding: 4px 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .logo { text-align: center; }
+
+    .logo img {
+      height: 55px;
+      width: auto;
+      transform: translateY(0);
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    section { padding: 28px 0; }
+
+    h1, h2 {
+      text-align: center;
+      margin-top: 4px;
+      margin-bottom: 10px;
+      color: #c00000;
+    }
+    p { text-align: center; max-width: 700px; margin: 0 auto 12px; }
+
+    .btn {
+      display: inline-block;
+      background: #000;
+      color: #fff;
+      padding: 15px 30px;
+      text-decoration: none;
+      margin-top: 20px;
+    }
+
+    .center { text-align: center; }
+
+    /* ===== CAROUSEL ===== */
+    .carousel-wrapper { position: relative; }
+
+    .grid {
+      display: flex;
+      gap: 0;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      padding: 0;
+      margin: 0;
+    }
+
+    .grid::-webkit-scrollbar { display: none; }
+
+    .grid-item, .grid img, .box {
+      flex: 0 0 85%;
+      scroll-snap-align: center;
+    }
+
+    .grid-item {
+      flex: 0 0 85%;
+      aspect-ratio: 3 / 4;
+      overflow: hidden;
+      border-radius: 12px;
+      background: #fff;
+      margin: 0;
+    }
+
+    .grid-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* force same visual size */
+      object-position: center;
+      display: block;
+      background: transparent;
+    }
+
+    .box {
+      background: #fff;
+      padding: 25px;
+      text-align: center;
+    }
+
+    .carousel-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0,0,0,0.6);
+      color: #fff;
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      z-index: 5;
+    }
+
+    .carousel-arrow.left { left: 10px; }
+    .carousel-arrow.right { right: 10px; }
+
+    @media (min-width: 768px) {
+      .carousel-arrow { display: none; }
+      .grid-item { flex: 0 0 45%; }
+    }
+    }
+
+    /* ===== OFFER ===== */
+    .offer-box {
+      background: #fff;
+      padding: 28px 20px;
+      max-width: 500px;
+      margin: auto;
+      border: 2px solid #5b3a29;
+      text-align: center;
+    }
+
+    .urgency {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      background: linear-gradient(90deg, #d40000, #000, #0047ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: pulseText 2s ease-in-out infinite;
+    }
+
+    .countdown {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    @keyframes pulseText {
+      0% { opacity: 1; }
+      50% { opacity: 0.65; }
+      100% { opacity: 1; }
+    }
+
+    .old-price { text-decoration: line-through; font-size: 20px; }
+    .new-price {
+      font-size: 28px;
+      font-weight: bold;
+      color: #5b3a29;
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    form input {
+      width: 85%;
+      margin: 6px auto;
+      padding: 9px;
+      display: block;
+      text-align: right;
+    }
+
+    .option-group {
+      margin: 12px 0;
+      text-align: center;
+    }
+
+    .option-group label {
+      display: block;
+      margin-bottom:6px; /* tighter label spacing */
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .option-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+
+    .options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+    }
+
+    .options input {
+      display: none;
+    }
+
+    .options span {
+      border: 1px solid #5b3a29;
+      padding: 8px 14px;
+      cursor: pointer;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+
+    .options input:checked + span {
+      background: #5b3a29;
+      color: #fff;
+    }
+
+    form button {
+      width: 100%;
+      padding: 14px;
+      background: #5b3a29;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+
+    .hero-video {
+      width: 100%;
+      max-width: 100%;
+      aspect-ratio: 3 / 4;
+      display: block;
+      margin: 40px auto 0;
+      border-radius: 16px;
+      object-fit: cover;
+    }
+
+    @media (min-width: 768px) {
+      .hero-video {
+        aspect-ratio: 16 / 9;
+        max-height: 520px;
+      }
+    }
+  
+    .error-msg{
+      display:none;
+      color:#d40000;
+      font-size:13px;
+      margin-top:10px; /* more breathing space */
+      margin-bottom:6px;
+      text-align:center;
+    }
+</style>
+</head>
+<body>
+
+  <!-- BLURRED DECORATIONS -->
+  <div class="bg-blob one"></div>
+  <div class="bg-blob two"></div>
+  <div class="bg-blob three"></div>
+
+<header>
+  <div class="logo">
+    <img src="files/white logo.png" alt="Logo">
+  </div>
+</header>
+
+<section style="padding-top:12px;">
+  <div class="container">
+    <h1>معطف شتوي أنيق وناعم</h1>
+    <p>دفء الشتاء بلمسة فخامة</p>
+    <div class="center"><a href="#order" class="btn">اطلبي الآن</a></div>
+    <video id="heroVideo" class="hero-video" muted playsinline autoplay preload="auto">
+      <source src="files/video-hero.mp4" type="video/mp4">
+    </video>
+  </div>
+</section>
+
+<section style="background:#fff;">
+  <div class="container">
+    <h2>متوفر في 4 ألوان</h2>
+    <div class="carousel-wrapper">
+      <button class="carousel-arrow left" onclick="scrollCarousel(this,1)">›</button>
+      <button class="carousel-arrow right" onclick="scrollCarousel(this,-1)">‹</button>
+      <div class="grid">
+        <div class="grid-item" data-color="بني"><img src="files/BLACK.jpg"></div>
+        <div class="grid-item" data-color="أسود"><img src="files/BROWN.jpg"></div>
+        <div class="grid-item" data-color="بنفسجي"><img src="files/GRAY.jpg"></div>
+        <div class="grid-item" data-color="أبيض"><img src="files/SAFFRON.jpg"></div>
+      </div>
+        
+  </div>
+</section>
+
+<!-- PRODUCT DETAILS -->
+<section style="background:#fff;">
+  <div class="container">
+    <h2>تفاصيل المنتج</h2>
+    <div class="carousel-wrapper">
+      <button class="carousel-arrow left" onclick="scrollCarousel(this,1)">›</button>
+      <button class="carousel-arrow right" onclick="scrollCarousel(this,-1)">‹</button>
+      <div class="grid">
+        <div class="grid-item"><img src="files/product.jpg" alt="تفاصيل المعطف 1"></div>
+        <div class="grid-item"><img src="files/product 1.jpg" alt="تفاصيل المعطف 2"></div>
+        <div class="grid-item"><img src="files/product 2.jpg" alt="تفاصيل المعطف 3"></div>
+        <div class="grid-item"><img src="files/product 3.jpg" alt="تفاصيل المعطف 4"></div>
+        <div class="grid-item"><img src="files/product4.jpg" alt="تفاصيل المعطف 5"></div>
+        <div class="grid-item"><img src="files/product5.jpg" alt="تفاصيل المعطف 6"></div>
+        <div class="grid-item"><img src="files/product6.jpg" alt="تفاصيل المعطف 7"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STYLING IDEAS -->
+<section>
+  <div class="container">
+    <h2>أفكار للتنسيق</h2>
+    <p>كيفاش تلبسي المعطف في إطلالات مختلفة</p>
+    <div class="carousel-wrapper">
+      <button class="carousel-arrow left" onclick="scrollCarousel(this,1)">›</button>
+      <button class="carousel-arrow right" onclick="scrollCarousel(this,-1)">‹</button>
+      <div class="grid">
+        <div class="grid-item"><img src="files/outfit 1.jpg" alt="إطلالة كاجوال"></div>
+        <div class="grid-item"><img src="files/outfit 2.jpg" alt="إطلالة أنيقة"></div>
+        <div class="grid-item"><img src="files/outfit 3.jpg" alt="إطلالة يومية"></div>
+        <div class="grid-item"><img src="files/outfit 6.jpg" alt="إطلالة شتوية"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOCIAL PROOF -->
+<section style="background:#fff;">
+  <div class="container">
+    <h2>تجارب الزبونات بعد التوصل بالطلب</h2>
+    <p>صور حقيقية لزبونات جرّبو المعطف وشاركو تجربتهم</p>
+    <div class="carousel-wrapper">
+      <button class="carousel-arrow left" onclick="scrollCarousel(this,1)">›</button>
+      <button class="carousel-arrow right" onclick="scrollCarousel(this,-1)">‹</button>
+      <div class="grid">
+        <div class="grid-item"><img src="files/customer-1.jpg" alt="زبونة بعد التوصل بالطلب"></div>
+        <div class="grid-item"><img src="files/customer-2.jpg" alt="زبونة جرّبت المعطف"></div>
+        <div class="grid-item"><img src="files/customer-3.jpg" alt="تجربة زبونة"></div>
+        <div class="grid-item"><img src="files/customer-4.jpg" alt="زبونة مع المعطف"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="order">
+  <div class="container">
+    <h2 id="offerTitle">عرض خاص</h2>
+    <div class="offer-box">
+      <div class="urgency" id="offerUrgency">الطلب كبير على هذا الموديل، لا تفوّتي الفرصة</div>
+      <div class="countdown" id="offerCountdown">ينتهي العرض خلال: <span id="timer">08:00:00</span></div>
+      <!-- تم حذف السعر الثابت، السعر يظهر حسب العرض -->
+      <form id="orderForm">
+        
+        <!-- QUANTITY FIRST -->
+        <div class="option-group">
+          <label>الكمية</label>
+          <div class="options" id="quantityOptions">
+            <label><input type="radio" name="quantity" value="1" checked><span>1</span></label>
+            <label><input type="radio" name="quantity" value="2"><span>2</span></label>
+            <label><input type="radio" name="quantity" value="3"><span>3</span></label>
+            <label><input type="radio" name="quantity" value="4"><span>4</span></label>
+          </div>
+        </div>
+
+        <!-- SIZE -->
+        <div class="option-group">
+          <label>المقاس</label><div class="error-msg" id="sizeError">🟥 المرجو اختيار المقاس قبل تأكيد الطلب</div>
+          <div class="options">
+            <label><input type="radio" name="size" value="S"><span>S</span></label>
+            <label><input type="radio" name="size" value="M"><span>M</span></label>
+            <label><input type="radio" name="size" value="L"><span>L</span></label>
+            <label><input type="radio" name="size" value="XL"><span>XL</span></label>
+          </div>
+        </div>
+
+        <!-- COLORS (MULTI SELECT) -->
+        <div class="option-group">
+          <label>الألوان (يمكن اختيار أكثر من لون)</label><div class="error-msg" id="colorError">🟥 المرجو اختيار اللون قبل تأكيد الطلب</div>
+          <div class="options">
+            <label><input type="checkbox" name="color" value="أسود"><span>أسود</span></label>
+            <label><input type="checkbox" name="color" value="أبيض"><span>أبيض</span></label>
+            <label><input type="checkbox" name="color" value="بنفسجي"><span>بنفسجي</span></label>
+            <label><input type="checkbox" name="color" value="بني"><span>بني</span></label>
+          </div>
+        </div>
+
+        <input placeholder="الاسم الكامل" required>
+        <input placeholder="رقم الهاتف" required>
+        <input placeholder="المدينة" required>
+
+        <div class="new-price center" id="totalPrice">—</div>
+        <div class="center" id="unitPrice" style="font-size:16px;margin-top:5px;color:#555;"></div>
+        <div class="center" id="discountNote" style="margin-bottom:15px;font-weight:bold;"></div>
+
+        <button type="submit">تأكيد الطلب</button>
+      </form>
+
+      <div id="thankYouMessage" style="display:none;text-align:center;padding:30px;">
+        <h2 style="color:#5b3a29;">شكراً على طلبك ❤️</h2>
+        <p>توصلنا بالطلب ديالك، وغادي يتواصلو معاك فالقريب باش نأكدّو المعلومات.</p>
+        <p style="font-weight:bold;">المرجو يبقى الهاتف مفتوح 📞</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER LEGAL -->
+<section style="background:#f1f1f1;padding:20px 0;">
+  <div class="container center" style="font-size:14px;color:#555;">
+    <span style="cursor:pointer;text-decoration:underline;margin-left:15px;" onclick="openModal('privacyModal')">سياسة الخصوصية</span>
+    <span style="cursor:pointer;text-decoration:underline;" onclick="openModal('termsModal')">الشروط والأحكام</span>
+  </div>
+</section>
+
+<!-- PRIVACY POLICY MODAL -->
+<div id="privacyModal" class="legal-modal">
+  <div class="legal-content">
+    <span class="close" onclick="closeModal('privacyModal')">×</span>
+    <h2>سياسة الخصوصية</h2>
+    <p>نحن نحترم خصوصيتك ونلتزم بحماية جميع المعلومات الشخصية التي تشاركها معنا عند طلبك لهذا المنتج.</p>
+    <p>المعلومات التي نقوم بجمعها تشمل الاسم، رقم الهاتف، والمدينة، وتُستعمل فقط من أجل معالجة الطلب والتواصل معك لتأكيده.</p>
+    <p>لا نقوم بمشاركة أو بيع معلوماتك لأي طرف ثالث تحت أي ظرف.</p>
+  </div>
+</div>
+
+<!-- TERMS MODAL -->
+<div id="termsModal" class="legal-modal">
+  <div class="legal-content">
+    <span class="close" onclick="closeModal('termsModal')">×</span>
+    <h2>الشروط والأحكام</h2>
+    <p>عند تأكيد الطلب، يوافق الزبون على استقبال اتصال هاتفي من فريقنا لتأكيد المعلومات.</p>
+    <p>جميع الطلبات تُعالج حسب توفر المنتج، وقد يتم الاتصال بالزبون في حالة وجود أي تغيير.</p>
+    <p>الدفع يتم عند الاستلام.</p>
+  </div>
+</div>
+
+<script>
+  /* LEGAL MODALS */
+  function openModal(id){ document.getElementById(id).style.display='flex'; }
+  function closeModal(id){ document.getElementById(id).style.display='none'; }
+</script>
+
+<style>
+  .legal-modal{
+    display:none;
+    position:fixed;
+    top:0;left:0;width:100%;height:100%;
+    background:rgba(0,0,0,0.6);
+    z-index:3000;
+    align-items:center;
+    justify-content:center;
+  }
+  .legal-content{
+    background:#fff;
+    max-width:600px;
+    width:90%;
+    padding:25px;
+    border-radius:10px;
+    position:relative;
+    text-align:right;
+    line-height:1.6;
+  }
+  .legal-content h2{color:#5b3a29;text-align:center;}
+  .legal-content .close{
+    position:absolute;
+    top:10px;left:15px;
+    font-size:22px;
+    cursor:pointer;
+  }
+</style>
+
+<script>
+  /* =====================
+     VIDEO AUTOPLAY
+  ===================== */
+  window.addEventListener('load', () => {
+    const v = document.getElementById('heroVideo');
+    if (!v) return;
+    setTimeout(() => v.play().catch(() => {}), 1500);
+  });
+
+  /* =====================
+     CAROUSEL SCROLL
+  ===================== */
+  function scrollCarousel(btn, direction) {
+    const grid = btn.parentElement.querySelector('.grid');
+    const item = grid.children[0];
+    const gap = 16;
+    const width = item.offsetWidth + gap;
+    grid.scrollBy({ left: -width * direction, behavior: 'smooth' });
+  }
+
+  /* =====================
+     COUNTDOWN (8H)
+  ===================== */
+  (function startCountdown() {
+    let total = 8 * 60 * 60;
+    const el = document.getElementById('timer');
+    if (!el) return;
+    setInterval(() => {
+      const h = String(Math.floor(total / 3600)).padStart(2, '0');
+      const m = String(Math.floor((total % 3600) / 60)).padStart(2, '0');
+      const s = String(total % 60).padStart(2, '0');
+      el.textContent = `${h}:${m}:${s}`;
+      if (total > 0) total--;
+    }, 1000);
+  })();
+
+  /* =====================
+     QUANTITY & COLOR LOGIC
+  ===================== */
+  const qtyRadios = Array.from(document.querySelectorAll('input[name="quantity"]'));
+  const colorInputs = Array.from(document.querySelectorAll('input[name="color"]'));
+
+  function getQty() {
+    const q = qtyRadios.find(r => r.checked);
+    return q ? parseInt(q.value) : 1;
+  }
+
+  function enforceColorLimit() {
+    const qty = getQty();
+    const checked = colorInputs.filter(c => c.checked);
+
+    if (checked.length > qty) {
+      checked.slice(qty).forEach(c => c.checked = false);
+    }
+
+    colorInputs.forEach(input => {
+      if (!input.checked) {
+        input.disabled = checked.length >= qty;
+        input.nextElementSibling.style.opacity = input.disabled ? '0.5' : '1';
+        input.nextElementSibling.style.cursor = input.disabled ? 'not-allowed' : 'pointer';
+      }
+    });
+  }
+
+  /* =====================
+     PRICE PROMO LOGIC
+  ===================== */
+  const priceEl = document.getElementById('totalPrice');
+  const unitEl = document.getElementById('unitPrice');
+  const noteEl = document.getElementById('discountNote');
+
+  function updatePrice() {
+    const qty = getQty();
+    let total = 459;
+    let unit = 459;
+
+    if (qty === 1) {
+      total = 459;
+      unit = 459;
+      noteEl.textContent = 'عرض قطعة واحدة';
+    } else if (qty === 2) {
+      total = 809;
+      unit = Math.round(total / 2);
+      noteEl.textContent = 'عرض ترويجي: قطعتان بسعر خاص';
+    } else if (qty === 3) {
+      total = 1099;
+      unit = Math.round(total / 3);
+      noteEl.textContent = 'عرض ترويجي: 3 قطع بأفضل سعر';
+    } else if (qty >= 4) {
+      total = 1200;
+      unit = Math.round(total / 4);
+      noteEl.textContent = 'عرض ترويجي: 4 قطع بسعر خاص';
+    }
+
+    priceEl.textContent = total + ' درهم';
+    unitEl.textContent = `(${unit} درهم للقطعة)`;
+  }
+
+  /* =====================
+     EVENTS
+  ===================== */
+  qtyRadios.forEach(r => r.addEventListener('change', () => {
+    updatePrice();
+    enforceColorLimit();
+  }));
+
+  colorInputs.forEach(input => {
+    input.addEventListener('change', e => {
+      enforceColorLimit();
+      const color = e.target.value;
+      const grid = document.querySelector('section:nth-of-type(2) .grid');
+      const items = Array.from(grid.children);
+      const target = items.find(i => i.dataset.color === color);
+      if (target) {
+        const gap = 16;
+        const width = target.offsetWidth + gap;
+        const index = items.indexOf(target);
+        grid.scrollTo({ left: index * width, behavior: 'smooth' });
+      }
+    });
+  });
+
+  updatePrice();
+  enforceColorLimit();
+
+    /* =====================
+     FORM SUBMIT (THANK YOU)
+  ===================== */
+  const form = document.getElementById('orderForm');
+  const thankYou = document.getElementById('thankYouMessage');
+  const sizeError = document.getElementById('sizeError');
+  const colorError = document.getElementById('colorError');
+
+  if (form && thankYou) {
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      let valid = true;
+      sizeError.style.display = 'none';
+      colorError.style.display = 'none';
+
+      const size = document.querySelector('input[name="size"]:checked');
+      if (!size) {
+        sizeError.style.display = 'block';
+        valid = false;
+      }
+
+      const colors = document.querySelectorAll('input[name="color"]:checked');
+      if (colors.length === 0) {
+        colorError.style.display = 'block';
+        valid = false;
+      }
+
+      if (!valid) return;
+
+      // hide offer messages
+      const urgency = document.getElementById('offerUrgency');
+      const countdown = document.getElementById('offerCountdown');
+      const offerTitle = document.getElementById('offerTitle');
+      if (urgency) urgency.style.display = 'none';
+      if (countdown) countdown.style.display = 'none';
+      if (offerTitle) offerTitle.style.display = 'none';
+
+      form.style.display = 'none';
+      thankYou.style.display = 'block';
+      thankYou.scrollIntoView({ behavior: 'smooth' });
+    });
+  }
+</script>
+
+</body>
+</html>
