@@ -291,6 +291,34 @@
       margin-bottom:6px;
       text-align:center;
     }
+
+    /* ===== LEGAL MODALS ===== */
+    .legal-modal{
+      position: fixed;
+      top:0;left:0;
+      width:100%;height:100%;
+      background: rgba(0,0,0,0.6);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      z-index:2000;
+    }
+    .legal-content{
+      background:#fff;
+      padding:25px;
+      max-width:600px;
+      width:90%;
+      border-radius:10px;
+      position:relative;
+      text-align:right;
+    }
+    .legal-content h2{color:#c00000;text-align:center;}
+    .legal-content .close{
+      position:absolute;
+      top:10px;left:15px;
+      font-size:22px;
+      cursor:pointer;
+    }
 </style>
 </head>
 <body>
@@ -591,20 +619,28 @@
       total: priceEl.textContent.replace(' درهم','')
     };
 
+    const fd = new FormData();
+    Object.entries(payload).forEach(([k,v]) => fd.append(k,v));
+
     fetch('https://script.google.com/macros/s/AKfycbwbK3L4tIFBA8k1B9q2eMlHA5UFOM-6UaH9-N9py6C9GCgoEMBOl452qi6L2PHrHqO_/exec', {
       method: 'POST',
-      body: JSON.stringify(payload)
+      body: fd
     })
     .then(() => {
-      document.getElementById('offerUrgency').style.display = 'none';
-      document.getElementById('offerCountdown').style.display = 'none';
-      document.getElementById('offerTitle').style.display = 'none';
       form.style.display = 'none';
       thankYou.style.display = 'block';
-      thankYou.scrollIntoView({ behavior: 'smooth' });
     })
     .catch(() => alert('وقع مشكل أثناء إرسال الطلب، المرجو المحاولة مرة أخرى'));
   });
+  /* =====================
+     LEGAL MODAL HANDLERS
+  ===================== */
+  function openModal(id){
+    document.getElementById(id).style.display='flex';
+  }
+  function closeModal(id){
+    document.getElementById(id).style.display='none';
+  }
 </script>
 
 </body>
