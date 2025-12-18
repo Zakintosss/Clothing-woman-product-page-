@@ -600,8 +600,8 @@
     });
 
     function updateCarousel() {
-      const slideWidth = 100 / getSlidesPerView();
-      track.style.transform = `translateX(${currentIndex * slideWidth}%)`;
+      const slideWidth = carousel.offsetWidth / getSlidesPerView();
+      track.style.transform = `translateX(${-currentIndex * slideWidth}px)`;
 
       // Update dots
       dotsContainer.querySelectorAll('.dot').forEach((dot, i) => {
@@ -650,20 +650,46 @@
     carousel.addEventListener('touchstart', stopAuto, { passive: true });
     carousel.addEventListener('touchend', () => setTimeout(startAuto, 3000));
 
-    // Touch swipe support
+    // Touch swipe support with drag feedback
     let touchStartX = 0;
-    let touchEndX = 0;
+    let touchCurrentX = 0;
+    let isDragging = false;
 
     track.addEventListener('touchstart', e => {
-      touchStartX = e.changedTouches[0].screenX;
+      touchStartX = e.touches[0].clientX;
+      touchCurrentX = touchStartX;
+      isDragging = true;
+      track.style.transition = 'none';
     }, { passive: true });
 
-    track.addEventListener('touchend', e => {
-      touchEndX = e.changedTouches[0].screenX;
-      const diff = touchStartX - touchEndX;
-      if (Math.abs(diff) > 50) {
-        if (diff > 0) nextSlide();
-        else prevSlide();
+    track.addEventListener('touchmove', e => {
+      if (!isDragging) return;
+      touchCurrentX = e.touches[0].clientX;
+      const diff = touchCurrentX - touchStartX;
+      const slideWidth = carousel.offsetWidth / getSlidesPerView();
+      const baseOffset = -currentIndex * slideWidth;
+      track.style.transform = `translateX(${baseOffset + diff}px)`;
+
+      // Prevent vertical scroll if horizontal swipe
+      if (Math.abs(diff) > 10) {
+        e.preventDefault();
+      }
+    }, { passive: false });
+
+    track.addEventListener('touchend', () => {
+      if (!isDragging) return;
+      isDragging = false;
+      track.style.transition = 'transform 0.4s ease';
+
+      const diff = touchCurrentX - touchStartX;
+      const threshold = carousel.offsetWidth * 0.2;
+
+      if (diff < -threshold) {
+        nextSlide();
+      } else if (diff > threshold) {
+        prevSlide();
+      } else {
+        updateCarousel();
       }
     });
 
