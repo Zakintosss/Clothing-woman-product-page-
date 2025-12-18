@@ -511,6 +511,14 @@
 
 <script>
   /* =====================
+     CAROUSEL SCROLL
+  ===================== */
+  function scrollCarousel(btn, dir) {
+    const grid = btn.parentElement.querySelector('.grid');
+    grid.scrollBy({ left: dir * 300, behavior: 'smooth' });
+  }
+
+  /* =====================
      VIDEO AUTOPLAY
   ===================== */
   window.addEventListener('load', () => {
