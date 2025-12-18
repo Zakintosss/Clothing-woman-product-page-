@@ -419,6 +419,8 @@ footer {
 footer p {
   color: #fff;
   margin: 0;
+  max-width: 100%;
+  text-align: center;
 }
 
 /* ===== RESPONSIVE ===== */
