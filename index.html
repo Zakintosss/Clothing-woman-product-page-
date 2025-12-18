@@ -622,18 +622,25 @@
     const fd = new FormData();
     Object.entries(payload).forEach(([k,v]) => fd.append(k,v));
 
-    fetch('https://primary-production-b1a51.up.railway.app/webhook-test/order', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json'
-  },
-  body: JSON.stringify(payload)
-});
-
-
-    // Fire & forget (Google Apps Script + no CORS)
-    form.style.display = 'none';
-    thankYou.style.display = 'block';
+    fetch('process_order.php', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(payload)
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.success) {
+        form.style.display = 'none';
+        thankYou.style.display = 'block';
+      } else {
+        alert('حدث خطأ، يرجى المحاولة مرة أخرى');
+      }
+    })
+    .catch(() => {
+      alert('حدث خطأ، يرجى المحاولة مرة أخرى');
+    });
   });
   /* =====================
      LEGAL MODAL HANDLERS
