@@ -159,6 +159,25 @@
     .carousel-arrow.left { left: 10px; }
     .carousel-arrow.right { right: 10px; }
 
+    .carousel-dots {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 12px;
+    }
+    .carousel-dots .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #ccc;
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .carousel-dots .dot.active {
+      background: #5b3a29;
+    }
+
     @media (min-width: 768px) {
       .carousel-arrow { display: none; }
       .grid-item { flex: 0 0 45%; }
@@ -511,11 +530,71 @@
 
 <script>
   /* =====================
-     CAROUSEL SCROLL
+     CAROUSEL SYSTEM
   ===================== */
+  (function initCarousels() {
+    const wrappers = document.querySelectorAll('.carousel-wrapper');
+
+    wrappers.forEach(wrapper => {
+      const grid = wrapper.querySelector('.grid');
+      const items = grid.querySelectorAll('.grid-item');
+      if (items.length === 0) return;
+
+      // Create dots container
+      const dotsContainer = document.createElement('div');
+      dotsContainer.className = 'carousel-dots';
+      items.forEach((_, i) => {
+        const dot = document.createElement('button');
+        dot.className = 'dot' + (i === 0 ? ' active' : '');
+        dot.onclick = () => goToSlide(wrapper, i);
+        dotsContainer.appendChild(dot);
+      });
+      wrapper.appendChild(dotsContainer);
+
+      // Sync dots on scroll
+      grid.addEventListener('scroll', () => {
+        const index = Math.round(grid.scrollLeft / items[0].offsetWidth);
+        updateDots(wrapper, index);
+      });
+
+      // Auto-slide every 4 seconds
+      let autoSlide = setInterval(() => advanceSlide(wrapper), 4000);
+      wrapper.addEventListener('mouseenter', () => clearInterval(autoSlide));
+      wrapper.addEventListener('mouseleave', () => {
+        autoSlide = setInterval(() => advanceSlide(wrapper), 4000);
+      });
+    });
+  })();
+
+  function goToSlide(wrapper, index) {
+    const grid = wrapper.querySelector('.grid');
+    const items = grid.querySelectorAll('.grid-item');
+    if (items[index]) {
+      grid.scrollTo({ left: items[index].offsetLeft - grid.offsetLeft, behavior: 'smooth' });
+    }
+    updateDots(wrapper, index);
+  }
+
+  function updateDots(wrapper, index) {
+    const dots = wrapper.querySelectorAll('.dot');
+    dots.forEach((dot, i) => dot.classList.toggle('active', i === index));
+  }
+
+  function advanceSlide(wrapper) {
+    const grid = wrapper.querySelector('.grid');
+    const items = grid.querySelectorAll('.grid-item');
+    const currentIndex = Math.round(grid.scrollLeft / items[0].offsetWidth);
+    const nextIndex = (currentIndex + 1) % items.length;
+    goToSlide(wrapper, nextIndex);
+  }
+
   function scrollCarousel(btn, dir) {
-    const grid = btn.parentElement.querySelector('.grid');
-    grid.scrollBy({ left: dir * 300, behavior: 'smooth' });
+    const wrapper = btn.parentElement;
+    const grid = wrapper.querySelector('.grid');
+    const items = grid.querySelectorAll('.grid-item');
+    const currentIndex = Math.round(grid.scrollLeft / items[0].offsetWidth);
+    const nextIndex = Math.max(0, Math.min(items.length - 1, currentIndex + dir));
+    goToSlide(wrapper, nextIndex);
   }
 
   /* =====================
