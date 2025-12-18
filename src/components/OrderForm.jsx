@@ -15,6 +15,7 @@ export default function OrderForm() {
   const [phone, setPhone] = useState('');
   const [city, setCity] = useState('');
   const [submitted, setSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState({});
   const [timer, setTimer] = useState(8 * 60 * 60);
 
@@ -52,6 +53,8 @@ export default function OrderForm() {
       return;
     }
 
+    setIsLoading(true);
+
     const payload = {
       name,
       phone,
@@ -77,6 +80,8 @@ export default function OrderForm() {
       }
     } catch {
       alert('حدث خطأ، يرجى المحاولة مرة أخرى');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -204,8 +209,20 @@ export default function OrderForm() {
               required
             />
 
-            <button type="submit" className="btn submit-btn">
-              تأكيد الطلب
+            <button
+              type="submit"
+              className="btn submit-btn"
+              disabled={isLoading}
+              style={{ opacity: isLoading ? 0.7 : 1 }}
+            >
+              {isLoading ? (
+                <span className="loading-text">
+                  <span className="spinner"></span>
+                  جاري الإرسال...
+                </span>
+              ) : (
+                'تأكيد الطلب'
+              )}
             </button>
           </form>
 

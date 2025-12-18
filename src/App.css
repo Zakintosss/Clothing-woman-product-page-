@@ -286,6 +286,33 @@ p {
   margin-top: 15px;
   font-size: 18px;
   font-weight: bold;
+  transition: opacity 0.3s;
+}
+
+.submit-btn:disabled {
+  cursor: not-allowed;
+}
+
+.loading-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .legal-note {
@@ -372,9 +399,10 @@ p {
 }
 
 .delivery-info span {
-  background: #5b3a29;
-  color: #fff;
+  background: transparent;
+  color: #5b3a29;
   padding: 10px 20px;
+  border: 2px solid #5b3a29;
   border-radius: 25px;
   font-size: 14px;
 }
