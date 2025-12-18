@@ -4,6 +4,23 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>معطف شتوي فاخر</title>
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '2069385303601370');
+  fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=2069385303601370&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel Code -->
   <style>
     body {
       margin: 0;
@@ -99,88 +116,106 @@
     .center { text-align: center; }
 
     /* ===== CAROUSEL ===== */
-    .carousel-wrapper { position: relative; }
-
-    .grid {
-      display: flex;
-      gap: 0;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      -webkit-overflow-scrolling: touch;
-      padding: 0;
-      margin: 0;
-    }
-
-    .grid::-webkit-scrollbar { display: none; }
-
-    .grid-item, .grid img, .box {
-      flex: 0 0 85%;
-      scroll-snap-align: center;
-    }
-
-    .grid-item {
-      flex: 0 0 85%;
-      aspect-ratio: 3 / 4;
+    .carousel-wrapper {
+      position: relative;
       overflow: hidden;
-      border-radius: 12px;
-      background: #fff;
-      margin: 0;
+      margin: 0 -20px;
+      padding: 0 20px;
     }
 
-    .grid-item img {
+    .carousel-track {
+      display: flex;
+      transition: transform 0.4s ease;
+    }
+
+    .carousel-slide {
+      flex: 0 0 100%;
+      padding: 0 8px;
+      box-sizing: border-box;
+    }
+
+    .carousel-slide img {
       width: 100%;
-      height: 100%;
-      object-fit: cover; /* force same visual size */
-      object-position: center;
+      height: auto;
+      max-height: 450px;
+      object-fit: contain;
+      border-radius: 12px;
       display: block;
-      background: transparent;
-    }
-
-    .box {
-      background: #fff;
-      padding: 25px;
-      text-align: center;
+      margin: 0 auto;
+      background: #f9f9f9;
     }
 
     .carousel-arrow {
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      background: rgba(0,0,0,0.6);
+      background: rgba(91, 58, 41, 0.85);
       color: #fff;
       border: none;
-      width: 40px;
-      height: 40px;
+      width: 44px;
+      height: 44px;
       border-radius: 50%;
       cursor: pointer;
-      z-index: 5;
+      z-index: 10;
+      font-size: 22px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      transition: background 0.2s;
     }
-
-    .carousel-arrow.left { left: 10px; }
-    .carousel-arrow.right { right: 10px; }
+    .carousel-arrow:hover { background: rgba(91, 58, 41, 1); }
+    .carousel-arrow.prev { left: 25px; }
+    .carousel-arrow.next { right: 25px; }
 
     .carousel-dots {
       display: flex;
       justify-content: center;
-      gap: 8px;
-      margin-top: 12px;
+      gap: 10px;
+      margin-top: 16px;
+      padding: 8px 0;
     }
     .carousel-dots .dot {
-      width: 10px;
-      height: 10px;
+      width: 12px;
+      height: 12px;
       border-radius: 50%;
-      background: #ccc;
+      background: #d0d0d0;
       border: none;
       cursor: pointer;
-      transition: background 0.3s;
+      transition: all 0.3s;
     }
     .carousel-dots .dot.active {
       background: #5b3a29;
+      transform: scale(1.2);
+    }
+
+    @media (max-width: 600px) {
+      .carousel-arrow {
+        width: 36px;
+        height: 36px;
+        font-size: 18px;
+      }
+      .carousel-arrow.prev { left: 8px; }
+      .carousel-arrow.next { right: 8px; }
+      .carousel-slide img {
+        max-height: 380px;
+      }
     }
 
     @media (min-width: 768px) {
-      .carousel-arrow { display: none; }
-      .grid-item { flex: 0 0 45%; }
+      .carousel-slide {
+        flex: 0 0 50%;
+      }
+      .carousel-slide img {
+        max-height: 500px;
+      }
+    }
+
+    .box {
+      background: #fff;
+      padding: 25px;
+      text-align: center;
     }
 
     /* ===== OFFER ===== */
@@ -367,16 +402,17 @@
 <section style="background:#fff;">
   <div class="container">
     <h2>متوفر في 4 ألوان</h2>
-    <div class="carousel-wrapper">
-      <button class="carousel-arrow left" onclick="scrollCarousel(this,1)">›</button>
-      <button class="carousel-arrow right" onclick="scrollCarousel(this,-1)">‹</button>
-      <div class="grid">
-        <div class="grid-item" data-color="بني"><img src="files/BLACK.jpg"></div>
-        <div class="grid-item" data-color="أسود"><img src="files/BROWN.jpg"></div>
-        <div class="grid-item" data-color="بنفسجي"><img src="files/GRAY.jpg"></div>
-        <div class="grid-item" data-color="أبيض"><img src="files/SAFFRON.jpg"></div>
+    <div class="carousel-wrapper" data-carousel>
+      <button class="carousel-arrow prev">‹</button>
+      <button class="carousel-arrow next">›</button>
+      <div class="carousel-track">
+        <div class="carousel-slide"><img src="files/BLACK.jpg" alt="أسود"></div>
+        <div class="carousel-slide"><img src="files/BROWN.jpg" alt="بني"></div>
+        <div class="carousel-slide"><img src="files/GRAY.jpg" alt="رمادي"></div>
+        <div class="carousel-slide"><img src="files/SAFFRON.jpg" alt="زعفراني"></div>
       </div>
-        
+      <div class="carousel-dots"></div>
+    </div>
   </div>
 </section>
 
@@ -384,18 +420,19 @@
 <section style="background:#fff;">
   <div class="container">
     <h2>تفاصيل المنتج</h2>
-    <div class="carousel-wrapper">
-      <button class="carousel-arrow left" onclick="scrollCarousel(this,1)">›</button>
-      <button class="carousel-arrow right" onclick="scrollCarousel(this,-1)">‹</button>
-      <div class="grid">
-        <div class="grid-item"><img src="files/product.jpg" alt="تفاصيل المعطف 1"></div>
-        <div class="grid-item"><img src="files/product 1.jpg" alt="تفاصيل المعطف 2"></div>
-        <div class="grid-item"><img src="files/product 2.jpg" alt="تفاصيل المعطف 3"></div>
-        <div class="grid-item"><img src="files/product 3.jpg" alt="تفاصيل المعطف 4"></div>
-        <div class="grid-item"><img src="files/product4.jpg" alt="تفاصيل المعطف 5"></div>
-        <div class="grid-item"><img src="files/product5.jpg" alt="تفاصيل المعطف 6"></div>
-        <div class="grid-item"><img src="files/product6.jpg" alt="تفاصيل المعطف 7"></div>
+    <div class="carousel-wrapper" data-carousel>
+      <button class="carousel-arrow prev">‹</button>
+      <button class="carousel-arrow next">›</button>
+      <div class="carousel-track">
+        <div class="carousel-slide"><img src="files/product.jpg" alt="تفاصيل المعطف 1"></div>
+        <div class="carousel-slide"><img src="files/product 1.jpg" alt="تفاصيل المعطف 2"></div>
+        <div class="carousel-slide"><img src="files/product 2.jpg" alt="تفاصيل المعطف 3"></div>
+        <div class="carousel-slide"><img src="files/product 3.jpg" alt="تفاصيل المعطف 4"></div>
+        <div class="carousel-slide"><img src="files/product4.jpg" alt="تفاصيل المعطف 5"></div>
+        <div class="carousel-slide"><img src="files/product5.jpg" alt="تفاصيل المعطف 6"></div>
+        <div class="carousel-slide"><img src="files/product6.jpg" alt="تفاصيل المعطف 7"></div>
       </div>
+      <div class="carousel-dots"></div>
     </div>
   </div>
 </section>
@@ -405,15 +442,16 @@
   <div class="container">
     <h2>أفكار للتنسيق</h2>
     <p>كيفاش تلبسي المعطف في إطلالات مختلفة</p>
-    <div class="carousel-wrapper">
-      <button class="carousel-arrow left" onclick="scrollCarousel(this,1)">›</button>
-      <button class="carousel-arrow right" onclick="scrollCarousel(this,-1)">‹</button>
-      <div class="grid">
-        <div class="grid-item"><img src="files/outfit 1.jpg" alt="إطلالة كاجوال"></div>
-        <div class="grid-item"><img src="files/outfit 2.jpg" alt="إطلالة أنيقة"></div>
-        <div class="grid-item"><img src="files/outfit 3.jpg" alt="إطلالة يومية"></div>
-        <div class="grid-item"><img src="files/outfit 6.jpg" alt="إطلالة شتوية"></div>
+    <div class="carousel-wrapper" data-carousel>
+      <button class="carousel-arrow prev">‹</button>
+      <button class="carousel-arrow next">›</button>
+      <div class="carousel-track">
+        <div class="carousel-slide"><img src="files/outfit 1.jpg" alt="إطلالة كاجوال"></div>
+        <div class="carousel-slide"><img src="files/outfit 2.jpg" alt="إطلالة أنيقة"></div>
+        <div class="carousel-slide"><img src="files/outfit 3.jpg" alt="إطلالة يومية"></div>
+        <div class="carousel-slide"><img src="files/outfit 6.jpg" alt="إطلالة شتوية"></div>
       </div>
+      <div class="carousel-dots"></div>
     </div>
   </div>
 </section>
@@ -423,15 +461,16 @@
   <div class="container">
     <h2>تجارب الزبونات بعد التوصل بالطلب</h2>
     <p>صور حقيقية لزبونات جرّبو المعطف وشاركو تجربتهم</p>
-    <div class="carousel-wrapper">
-      <button class="carousel-arrow left" onclick="scrollCarousel(this,1)">›</button>
-      <button class="carousel-arrow right" onclick="scrollCarousel(this,-1)">‹</button>
-      <div class="grid">
-        <div class="grid-item"><img src="files/customer-1.jpg" alt="زبونة بعد التوصل بالطلب"></div>
-        <div class="grid-item"><img src="files/customer-2.jpg" alt="زبونة جرّبت المعطف"></div>
-        <div class="grid-item"><img src="files/customer-3.jpg" alt="تجربة زبونة"></div>
-        <div class="grid-item"><img src="files/customer-4.jpg" alt="زبونة مع المعطف"></div>
+    <div class="carousel-wrapper" data-carousel>
+      <button class="carousel-arrow prev">‹</button>
+      <button class="carousel-arrow next">›</button>
+      <div class="carousel-track">
+        <div class="carousel-slide"><img src="files/customer-1.jpg" alt="زبونة بعد التوصل بالطلب"></div>
+        <div class="carousel-slide"><img src="files/customer-2.jpg" alt="زبونة جرّبت المعطف"></div>
+        <div class="carousel-slide"><img src="files/customer-3.jpg" alt="تجربة زبونة"></div>
+        <div class="carousel-slide"><img src="files/customer-4.jpg" alt="زبونة مع المعطف"></div>
       </div>
+      <div class="carousel-dots"></div>
     </div>
   </div>
 </section>
@@ -532,70 +571,114 @@
   /* =====================
      CAROUSEL SYSTEM
   ===================== */
-  (function initCarousels() {
-    const wrappers = document.querySelectorAll('.carousel-wrapper');
+  document.querySelectorAll('[data-carousel]').forEach(carousel => {
+    const track = carousel.querySelector('.carousel-track');
+    const slides = carousel.querySelectorAll('.carousel-slide');
+    const dotsContainer = carousel.querySelector('.carousel-dots');
+    const prevBtn = carousel.querySelector('.carousel-arrow.prev');
+    const nextBtn = carousel.querySelector('.carousel-arrow.next');
 
-    wrappers.forEach(wrapper => {
-      const grid = wrapper.querySelector('.grid');
-      const items = grid.querySelectorAll('.grid-item');
-      if (items.length === 0) return;
+    let currentIndex = 0;
+    let autoInterval = null;
+    const slideCount = slides.length;
 
-      // Create dots container
-      const dotsContainer = document.createElement('div');
-      dotsContainer.className = 'carousel-dots';
-      items.forEach((_, i) => {
-        const dot = document.createElement('button');
-        dot.className = 'dot' + (i === 0 ? ' active' : '');
-        dot.onclick = () => goToSlide(wrapper, i);
-        dotsContainer.appendChild(dot);
-      });
-      wrapper.appendChild(dotsContainer);
-
-      // Sync dots on scroll
-      grid.addEventListener('scroll', () => {
-        const index = Math.round(grid.scrollLeft / items[0].offsetWidth);
-        updateDots(wrapper, index);
-      });
-
-      // Auto-slide every 4 seconds
-      let autoSlide = setInterval(() => advanceSlide(wrapper), 4000);
-      wrapper.addEventListener('mouseenter', () => clearInterval(autoSlide));
-      wrapper.addEventListener('mouseleave', () => {
-        autoSlide = setInterval(() => advanceSlide(wrapper), 4000);
-      });
-    });
-  })();
-
-  function goToSlide(wrapper, index) {
-    const grid = wrapper.querySelector('.grid');
-    const items = grid.querySelectorAll('.grid-item');
-    if (items[index]) {
-      grid.scrollTo({ left: items[index].offsetLeft - grid.offsetLeft, behavior: 'smooth' });
+    // Check if desktop (2 slides visible)
+    function getSlidesPerView() {
+      return window.innerWidth >= 768 ? 2 : 1;
     }
-    updateDots(wrapper, index);
-  }
 
-  function updateDots(wrapper, index) {
-    const dots = wrapper.querySelectorAll('.dot');
-    dots.forEach((dot, i) => dot.classList.toggle('active', i === index));
-  }
+    function getMaxIndex() {
+      return Math.max(0, slideCount - getSlidesPerView());
+    }
 
-  function advanceSlide(wrapper) {
-    const grid = wrapper.querySelector('.grid');
-    const items = grid.querySelectorAll('.grid-item');
-    const currentIndex = Math.round(grid.scrollLeft / items[0].offsetWidth);
-    const nextIndex = (currentIndex + 1) % items.length;
-    goToSlide(wrapper, nextIndex);
-  }
+    // Create dots
+    slides.forEach((_, i) => {
+      const dot = document.createElement('button');
+      dot.className = 'dot' + (i === 0 ? ' active' : '');
+      dot.addEventListener('click', () => goToSlide(i));
+      dotsContainer.appendChild(dot);
+    });
 
-  function scrollCarousel(btn, dir) {
-    const wrapper = btn.parentElement;
-    const grid = wrapper.querySelector('.grid');
-    const items = grid.querySelectorAll('.grid-item');
-    const currentIndex = Math.round(grid.scrollLeft / items[0].offsetWidth);
-    const nextIndex = Math.max(0, Math.min(items.length - 1, currentIndex + dir));
-    goToSlide(wrapper, nextIndex);
-  }
+    function updateCarousel() {
+      const slideWidth = 100 / getSlidesPerView();
+      track.style.transform = `translateX(${currentIndex * slideWidth}%)`;
+
+      // Update dots
+      dotsContainer.querySelectorAll('.dot').forEach((dot, i) => {
+        dot.classList.toggle('active', i === currentIndex);
+      });
+    }
+
+    function goToSlide(index) {
+      currentIndex = Math.max(0, Math.min(index, getMaxIndex()));
+      updateCarousel();
+    }
+
+    function nextSlide() {
+      if (currentIndex >= getMaxIndex()) {
+        currentIndex = 0;
+      } else {
+        currentIndex++;
+      }
+      updateCarousel();
+    }
+
+    function prevSlide() {
+      if (currentIndex <= 0) {
+        currentIndex = getMaxIndex();
+      } else {
+        currentIndex--;
+      }
+      updateCarousel();
+    }
+
+    // Arrow buttons
+    prevBtn.addEventListener('click', prevSlide);
+    nextBtn.addEventListener('click', nextSlide);
+
+    // Auto-slide
+    function startAuto() {
+      autoInterval = setInterval(nextSlide, 4000);
+    }
+
+    function stopAuto() {
+      clearInterval(autoInterval);
+    }
+
+    carousel.addEventListener('mouseenter', stopAuto);
+    carousel.addEventListener('mouseleave', startAuto);
+    carousel.addEventListener('touchstart', stopAuto, { passive: true });
+    carousel.addEventListener('touchend', () => setTimeout(startAuto, 3000));
+
+    // Touch swipe support
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    track.addEventListener('touchstart', e => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    track.addEventListener('touchend', e => {
+      touchEndX = e.changedTouches[0].screenX;
+      const diff = touchStartX - touchEndX;
+      if (Math.abs(diff) > 50) {
+        if (diff > 0) nextSlide();
+        else prevSlide();
+      }
+    });
+
+    // Handle resize
+    window.addEventListener('resize', () => {
+      if (currentIndex > getMaxIndex()) {
+        currentIndex = getMaxIndex();
+      }
+      updateCarousel();
+    });
+
+    // Start
+    updateCarousel();
+    startAuto();
+  });
 
   /* =====================
      VIDEO AUTOPLAY
@@ -719,6 +802,7 @@
     .then(response => response.json())
     .then(data => {
       if (data.success) {
+        fbq('track', 'Lead');
         form.style.display = 'none';
         thankYou.style.display = 'block';
       } else {
