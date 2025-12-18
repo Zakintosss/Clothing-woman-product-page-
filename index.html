@@ -585,7 +585,8 @@
     }
 
     function updatePosition() {
-      const percent = (index * 100) / perView();
+      const slideWidth = 100 / perView();
+      const percent = index * slideWidth;
       inner.style.transform = `translateX(-${percent}%)`;
       indicators.querySelectorAll('button').forEach((b, i) => {
         b.classList.toggle('active', i === index);
@@ -636,7 +637,8 @@
       if (!dragging) return;
       currentX = e.touches ? e.touches[0].clientX : e.clientX;
       const diff = currentX - startX;
-      const percent = (index * 100) / perView();
+      const slideWidth = 100 / perView();
+      const percent = index * slideWidth;
       const drag = (diff / carousel.offsetWidth) * 100;
       inner.style.transform = `translateX(${-percent + drag}%)`;
     };
