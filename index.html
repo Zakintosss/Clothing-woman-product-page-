@@ -622,7 +622,7 @@
     const fd = new FormData();
     Object.entries(payload).forEach(([k,v]) => fd.append(k,v));
 
-    fetch('process_order.php', {
+    fetch('/api/order', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
