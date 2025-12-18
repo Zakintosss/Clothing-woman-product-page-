@@ -1,6 +1,6 @@
 export default function Hero() {
   return (
-    <section style={{ paddingTop: '12px' }}>
+    <section className="hero-section">
       <div className="container">
         <h1>معطف شتوي أنيق وناعم</h1>
         <p>دفء الشتاء بلمسة فخامة</p>
