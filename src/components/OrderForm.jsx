@@ -73,7 +73,7 @@ export default function OrderForm() {
       });
 
       if (response.ok) {
-        if (window.fbq) window.fbq('track', 'Lead');
+        if (window.fbq) window.fbq('track', 'Purchase');
         setSubmitted(true);
       } else {
         alert('حدث خطأ، يرجى المحاولة مرة أخرى');
