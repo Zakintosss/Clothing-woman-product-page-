@@ -162,7 +162,7 @@ export default function OrderForm() {
             <p className="label">اختاري اللون ({colors.length}/{quantity}):</p>
             {errors.colors && <p className="error">يرجى اختيار لون واحد على الأقل</p>}
             <div className="color-options">
-              {['أسود', 'أبيض', 'بنفسجي', 'بني'].map(c => (
+              {['أسود', 'بنفسجي', 'بني'].map(c => (
                 <label
                   key={c}
                   className={colors.includes(c) ? 'selected' : ''}
