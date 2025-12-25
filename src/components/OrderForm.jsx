@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 
 const prices = {
-  1: { total: 459, unit: 459, note: 'عرض قطعة واحدة' },
-  2: { total: 809, unit: 405, note: 'عرض ترويجي: قطعتان بسعر خاص' },
-  3: { total: 1099, unit: 366, note: 'عرض ترويجي: 3 قطع بأفضل سعر' },
-  4: { total: 1200, unit: 300, note: 'عرض ترويجي: 4 قطع بسعر خاص' },
+  1: { total: 798, unit: 798, oldPrice: 1200, note: 'عرض قطعة واحدة' },
+  2: { total: 1400, unit: 700, oldPrice: 2400, note: 'عرض ترويجي: قطعتان بسعر خاص' },
+  3: { total: 1900, unit: 633, oldPrice: 3600, note: 'عرض ترويجي: 3 قطع بأفضل سعر' },
+  4: { total: 2400, unit: 600, oldPrice: 4800, note: 'عرض ترويجي: 4 قطع بسعر خاص' },
 };
 
 export default function OrderForm() {
@@ -181,6 +181,7 @@ export default function OrderForm() {
 
             {/* Price */}
             <div className="price-display">
+              <p className="old-price"><s>{prices[quantity].oldPrice} درهم</s></p>
               <p className="total-price">{prices[quantity].total} درهم</p>
               <p className="unit-price">({prices[quantity].unit} درهم للقطعة)</p>
               <p className="discount-note">{prices[quantity].note}</p>
