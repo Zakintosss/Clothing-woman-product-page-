@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 
 const prices = {
-  1: { total: 798, unit: 798, oldPrice: 1200, note: 'عرض قطعة واحدة' },
-  2: { total: 1400, unit: 700, oldPrice: 2400, note: 'عرض ترويجي: قطعتان بسعر خاص' },
-  3: { total: 1900, unit: 633, oldPrice: 3600, note: 'عرض ترويجي: 3 قطع بأفضل سعر' },
-  4: { total: 2400, unit: 600, oldPrice: 4800, note: 'عرض ترويجي: 4 قطع بسعر خاص' },
+  1: { total: 599, unit: 599, oldPrice: 1200, note: 'عرض قطعة واحدة' },
+  2: { total: 1100, unit: 550, oldPrice: 2400, note: 'عرض ترويجي: قطعتان بسعر خاص' },
+  3: { total: 1500, unit: 500, oldPrice: 3600, note: 'عرض ترويجي: 3 قطع بأفضل سعر' },
+  4: { total: 1900, unit: 475, oldPrice: 4800, note: 'عرض ترويجي: 4 قطع بسعر خاص' },
 };
 
 export default function OrderForm() {
