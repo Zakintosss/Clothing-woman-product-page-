@@ -27,7 +27,14 @@
     ]
   },
   "styling": {
-    "enabled": false
+    "sectionTitle": "أفكار للتنسيق",
+    "description": "كيفاش تلبسي الجيليه في إطلالات مختلفة",
+    "images": [
+      { "src": "/products/winter-fur-vest/outfits/outfit 1.jpg", "alt": "إطلالة كاجوال" },
+      { "src": "/products/winter-fur-vest/outfits/outfit 2.jpg", "alt": "إطلالة أنيقة" },
+      { "src": "/products/winter-fur-vest/outfits/outfit 3.jpg", "alt": "إطلالة يومية" },
+      { "src": "/products/winter-fur-vest/outfits/outfit 4.jpg", "alt": "إطلالة شتوية" }
+    ]
   },
   "reviews": {
     "enabled": false
