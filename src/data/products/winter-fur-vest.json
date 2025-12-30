@@ -21,9 +21,10 @@
   "gallery": {
     "sectionTitle": "تفاصيل المنتج",
     "images": [
-      { "src": "/products/winter-fur-vest/gallery/product.jpg", "alt": "تفاصيل الجيليه 1" },
-      { "src": "/products/winter-fur-vest/gallery/product 1.jpg", "alt": "تفاصيل الجيليه 2" },
-      { "src": "/products/winter-fur-vest/gallery/product 2.jpg", "alt": "تفاصيل الجيليه 3" }
+      { "src": "/products/winter-fur-vest/gallery/product 1.jpg", "alt": "تفاصيل الجيليه 1" },
+      { "src": "/products/winter-fur-vest/gallery/product 2.jpg", "alt": "تفاصيل الجيليه 2" },
+      { "src": "/products/winter-fur-vest/gallery/product 3.jpg", "alt": "تفاصيل الجيليه 3" },
+      { "src": "/products/winter-fur-vest/gallery/product 4.jpg", "alt": "تفاصيل الجيليه 4" }
     ]
   },
   "styling": {
