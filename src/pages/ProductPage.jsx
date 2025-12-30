@@ -33,8 +33,8 @@ export default function ProductPage() {
       <Hero data={product.hero} />
       <ColorSection data={product.colors} />
       <ProductDetails data={product.gallery} />
-      <StylingIdeas data={product.styling} />
-      <CustomerReviews data={product.reviews} />
+      {product.styling?.enabled !== false && <StylingIdeas data={product.styling} />}
+      {product.reviews?.enabled !== false && <CustomerReviews data={product.reviews} />}
       <OrderForm data={product.order} productSlug={slug} />
     </>
   );

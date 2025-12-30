@@ -1,0 +1,48 @@
+{
+  "slug": "winter-fur-vest",
+  "meta": {
+    "title": "جيليه و معطف شتوي أنيق مبطّن بالفرو",
+    "description": "أناقة ودفء في تصميم واحد"
+  },
+  "hero": {
+    "title": "جيليه و معطف شتوي أنيق مبطّن بالفرو",
+    "subtitle": "أناقة ودفء في تصميم واحد",
+    "video": "/products/winter-fur-vest/hero-video.mp4",
+    "ctaText": "اطلبي الآن"
+  },
+  "colors": {
+    "sectionTitle": "متوفر في 3 ألوان",
+    "items": [
+      { "name": "أبيض", "image": "/products/winter-fur-vest/colors/WHITE.jpg" },
+      { "name": "أسود", "image": "/products/winter-fur-vest/colors/BLACK.jpg" },
+      { "name": "بني", "image": "/products/winter-fur-vest/colors/BROWN.jpg" }
+    ]
+  },
+  "gallery": {
+    "sectionTitle": "تفاصيل المنتج",
+    "images": [
+      { "src": "/products/winter-fur-vest/gallery/product.jpg", "alt": "تفاصيل الجيليه 1" },
+      { "src": "/products/winter-fur-vest/gallery/product 1.jpg", "alt": "تفاصيل الجيليه 2" },
+      { "src": "/products/winter-fur-vest/gallery/product 2.jpg", "alt": "تفاصيل الجيليه 3" }
+    ]
+  },
+  "styling": {
+    "enabled": false
+  },
+  "reviews": {
+    "enabled": false
+  },
+  "order": {
+    "sectionTitle": "عرض خاص",
+    "sizes": ["S", "M", "L", "XL"],
+    "availableColors": ["أبيض", "أسود", "بني"],
+    "pricing": {
+      "1": { "total": 579, "unit": 579, "oldPrice": 1200, "note": "عرض قطعة واحدة" },
+      "2": { "total": 1058, "unit": 529, "oldPrice": 2400, "note": "عرض ترويجي: قطعتان بسعر خاص" },
+      "3": { "total": 1437, "unit": 479, "oldPrice": 3600, "note": "عرض ترويجي: 3 قطع بأفضل سعر" },
+      "4": { "total": 1796, "unit": 449, "oldPrice": 4800, "note": "عرض ترويجي: 4 قطع بسعر خاص" }
+    },
+    "maxQuantity": 4,
+    "webhookUrl": "https://primary-production-b1a51.up.railway.app/webhook/order"
+  }
+}

@@ -7,6 +7,14 @@
       "thumbnail": "/products/winter-coat/gallery/product.jpg",
       "price": 599,
       "oldPrice": 1200
+    },
+    {
+      "slug": "winter-fur-vest",
+      "name": "جيليه و معطف شتوي أنيق مبطّن بالفرو",
+      "shortDescription": "أناقة ودفء في تصميم واحد",
+      "thumbnail": "/products/winter-fur-vest/gallery/product.jpg",
+      "price": 579,
+      "oldPrice": 1200
     }
   ]
 }
