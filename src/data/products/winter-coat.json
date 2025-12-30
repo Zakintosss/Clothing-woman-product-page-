@@ -1,0 +1,67 @@
+{
+  "slug": "winter-coat",
+  "meta": {
+    "title": "معطف شتوي فاخر",
+    "description": "دفء الشتاء بلمسة فخامة"
+  },
+  "hero": {
+    "title": "معطف شتوي أنيق وناعم",
+    "subtitle": "دفء الشتاء بلمسة فخامة",
+    "video": "/products/winter-coat/hero-video.mp4",
+    "ctaText": "اطلبي الآن"
+  },
+  "colors": {
+    "sectionTitle": "متوفر في 4 ألوان",
+    "items": [
+      { "name": "أسود", "image": "/products/winter-coat/colors/BLACK.jpg" },
+      { "name": "بني", "image": "/products/winter-coat/colors/BROWN.jpg" },
+      { "name": "رمادي", "image": "/products/winter-coat/colors/GRAY.jpg" },
+      { "name": "زعفراني", "image": "/products/winter-coat/colors/SAFFRON.jpg" }
+    ]
+  },
+  "gallery": {
+    "sectionTitle": "تفاصيل المنتج",
+    "images": [
+      { "src": "/products/winter-coat/gallery/product.jpg", "alt": "تفاصيل المعطف 1" },
+      { "src": "/products/winter-coat/gallery/product 1.jpg", "alt": "تفاصيل المعطف 2" },
+      { "src": "/products/winter-coat/gallery/product 2.jpg", "alt": "تفاصيل المعطف 3" },
+      { "src": "/products/winter-coat/gallery/product 3.jpg", "alt": "تفاصيل المعطف 4" },
+      { "src": "/products/winter-coat/gallery/product4.jpg", "alt": "تفاصيل المعطف 5" },
+      { "src": "/products/winter-coat/gallery/product5.jpg", "alt": "تفاصيل المعطف 6" },
+      { "src": "/products/winter-coat/gallery/product6.jpg", "alt": "تفاصيل المعطف 7" }
+    ]
+  },
+  "styling": {
+    "sectionTitle": "أفكار للتنسيق",
+    "description": "كيفاش تلبسي المعطف في إطلالات مختلفة",
+    "images": [
+      { "src": "/products/winter-coat/outfits/outfit 1.jpg", "alt": "إطلالة كاجوال" },
+      { "src": "/products/winter-coat/outfits/outfit 2.jpg", "alt": "إطلالة أنيقة" },
+      { "src": "/products/winter-coat/outfits/outfit 3.jpg", "alt": "إطلالة يومية" },
+      { "src": "/products/winter-coat/outfits/outfit 6.jpg", "alt": "إطلالة شتوية" }
+    ]
+  },
+  "reviews": {
+    "sectionTitle": "تجارب الزبونات بعد التوصل بالطلب",
+    "description": "صور حقيقية لزبونات جرّبو المعطف وشاركو تجربتهم",
+    "images": [
+      { "src": "/products/winter-coat/reviews/customer-1.jpg", "alt": "زبونة بعد التوصل بالطلب" },
+      { "src": "/products/winter-coat/reviews/customer-2.jpg", "alt": "زبونة جرّبت المعطف" },
+      { "src": "/products/winter-coat/reviews/customer-3.jpg", "alt": "تجربة زبونة" },
+      { "src": "/products/winter-coat/reviews/customer-4.jpg", "alt": "زبونة مع المعطف" }
+    ]
+  },
+  "order": {
+    "sectionTitle": "عرض خاص",
+    "sizes": ["S", "M", "L", "XL"],
+    "availableColors": ["أسود", "بنفسجي", "بني"],
+    "pricing": {
+      "1": { "total": 599, "unit": 599, "oldPrice": 1200, "note": "عرض قطعة واحدة" },
+      "2": { "total": 1100, "unit": 550, "oldPrice": 2400, "note": "عرض ترويجي: قطعتان بسعر خاص" },
+      "3": { "total": 1500, "unit": 500, "oldPrice": 3600, "note": "عرض ترويجي: 3 قطع بأفضل سعر" },
+      "4": { "total": 1900, "unit": 475, "oldPrice": 4800, "note": "عرض ترويجي: 4 قطع بسعر خاص" }
+    },
+    "maxQuantity": 4,
+    "webhookUrl": "https://primary-production-b1a51.up.railway.app/webhook/order"
+  }
+}

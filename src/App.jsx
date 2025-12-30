@@ -1,32 +1,27 @@
-import Header from './components/Header';
-import Hero from './components/Hero';
-import ColorSection from './components/ColorSection';
-import ProductDetails from './components/ProductDetails';
-import StylingIdeas from './components/StylingIdeas';
-import CustomerReviews from './components/CustomerReviews';
-import OrderForm from './components/OrderForm';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Header from './components/shared/Header';
+import Footer from './components/shared/Footer';
+import HomePage from './pages/HomePage';
+import ProductPage from './pages/ProductPage';
 import './App.css';
 
 function App() {
   return (
-    <div className="app">
-      {/* Background blobs */}
-      <div className="bg-blob one"></div>
-      <div className="bg-blob two"></div>
-      <div className="bg-blob three"></div>
+    <BrowserRouter>
+      <div className="app">
+        {/* Background blobs */}
+        <div className="bg-blob one"></div>
+        <div className="bg-blob two"></div>
+        <div className="bg-blob three"></div>
 
-      <Header />
-      <Hero />
-      <ColorSection />
-      <ProductDetails />
-      <StylingIdeas />
-      <CustomerReviews />
-      <OrderForm />
-
-      <footer>
-        <p>© 2024 جميع الحقوق محفوظة</p>
-      </footer>
-    </div>
+        <Header />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/product/:slug" element={<ProductPage />} />
+        </Routes>
+        <Footer />
+      </div>
+    </BrowserRouter>
   );
 }
 

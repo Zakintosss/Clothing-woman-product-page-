@@ -1,0 +1,12 @@
+{
+  "products": [
+    {
+      "slug": "winter-coat",
+      "name": "معطف شتوي فاخر",
+      "shortDescription": "دفء الشتاء بلمسة فخامة",
+      "thumbnail": "/products/winter-coat/gallery/product.jpg",
+      "price": 599,
+      "oldPrice": 1200
+    }
+  ]
+}
